@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->attachRolesToUsers();
 
         User::factory()->count(50)->create();
-        Department::factory()->count(50)->create();
+        Department::factory()->count(10)->create();
+
+        $this->attachUsersToDepartments();
     }
 
     private function createRoles(): void
@@ -89,5 +91,16 @@ class DatabaseSeeder extends Seeder
             $role = Role::where('slug', $roles[$index])->first();
             $user->roles()->attach($role);
         }
+    }
+
+    private function attachUsersToDepartments(): void
+    {
+        $users = User::all();
+
+        Department::all()->each(function ($department) use ($users) {
+            $department->users()->attach(
+                $users->random(rand(5, 10))->pluck('id')->toArray()
+            );
+        });
     }
 }
