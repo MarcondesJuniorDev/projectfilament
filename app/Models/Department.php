@@ -33,7 +33,7 @@ class Department extends Model
 
         static::saving(function ($department) {
             $department->slug = Str::slug($department->name);
-            $department->author_id = auth()->id();
+            $department->author_id = auth()->id() ?? User::factory()->create()->id;
         });
     }
 
