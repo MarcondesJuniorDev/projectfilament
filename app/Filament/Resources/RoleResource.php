@@ -28,9 +28,9 @@ class RoleResource extends Resource
 
     protected static ?string $pluralModelLabel = "Funções";
 
-    protected static ?string $navigationIcon = 'heroicon-o-finger-print';
+    protected static ?string $navigationIcon = 'heroicon-o-key';
 
-    protected static ?string $activeNavigationIcon = 'heroicon-s-finger-print';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-key';
 
     public static function form(Form $form): Form
     {

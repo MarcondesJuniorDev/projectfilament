@@ -8,6 +8,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -138,6 +139,18 @@ class UserResource extends Resource
                     ->width('150px')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->label('Funções')
+                    ->badge(fn($record) => $record->roles->pluck('name'))
+                    ->color(Color::Emerald)
+                    ->width('150px')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('departments.name')
+                    ->label('Departamento')
+                    ->badge(fn($record) => $record->department->name ?? 'N/A')
+                    ->color(Color::Fuchsia)
+                    ->width('150px')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('website')
                     ->label('Website')
                     ->width('150px')
@@ -204,7 +217,16 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('Ativos')->query(
+                    fn (Builder $query) => $query->where('status', true)
+                ),
+                Tables\Filters\Filter::make('Inativos')->query(
+                    fn (Builder $query) => $query->where('status', false)
+                ),
+                Tables\Filters\SelectFilter::make('roles')
+                    ->label('Funções')
+                    ->multiple()
+                    ->relationship('roles', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
