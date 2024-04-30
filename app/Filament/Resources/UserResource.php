@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use function Pest\Laravel\options;
 
 class UserResource extends Resource
 {
@@ -35,6 +36,7 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Dados de Login')
                     ->description('Insira os dados de login do usuário.')
+                    ->aside()
                     ->schema([
                             Forms\Components\TextInput::make('name')
                                 ->required()
@@ -66,57 +68,71 @@ class UserResource extends Resource
                                 ->maxLength(255),
                         ]),
                 Forms\Components\Section::make('Dados Pessoais')
-                    ->description('Insira os dados pessoais do usuário.')
+                    ->description('Insira detalhes do usuário.')
+                    ->aside()
                     ->schema([
                         Forms\Components\FileUpload::make('image')
-                            ->avatar()
                             ->label('Avatar')
                             ->disk('public')
                             ->directory('users')
                             ->image()
                             ->imageEditor()
                             ->circleCropper()
-                            ->preserveFilenames(),
+                            ->preserveFilenames()
+                            ->columnSpanFull(),
                         Forms\Components\Toggle::make('status')
                             ->label('Status')
-                            ->default(false),
+                            ->default(false)
+                            ->columnSpan(3),
                         Forms\Components\Toggle::make('featured_homepage')
                             ->label('Destaque na página inicial')
-                            ->default(false),
+                            ->default(false)
+                            ->columnSpan(3),
                         Forms\Components\Select::make('roles')
                             ->label('Funções')
                             ->relationship('roles', 'name')
-                            ->multiple(),
+                            ->multiple()
+                            ->columnSpan(3),
                         Forms\Components\Select::make('department')
                             ->label('Departamento')
                             ->relationship('departments', 'name')
                             ->searchable()
-                            ->nullable(),
+                            ->nullable()
+                            ->columnSpan(3),
                         Forms\Components\Textarea::make('about')
                             ->label('Sobre')
-                            ->rows(3),
+                            ->rows(3)
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('website')
                             ->label('Website')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(3),
                         Forms\Components\TextInput::make('lattes')
                             ->label('Lattes')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(3),
                         Forms\Components\TextInput::make('linkedin')
                             ->label('LinkedIn')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(3),
                         Forms\Components\TextInput::make('github')
                             ->label('GitHub')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(3),
                         Forms\Components\TextInput::make('facebook')
                             ->label('Facebook')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(2),
                         Forms\Components\TextInput::make('twitter')
                             ->label('Twitter')
-                            ->url(),
+                            ->url()
+                            ->columnSpan(2),
                         Forms\Components\TextInput::make('instagram')
                             ->label('Instagram')
-                            ->url(),
-                    ]),
+                            ->url()
+                            ->columnSpan(2),
+                    ])
+                    ->columns(6),
             ]);
     }
 
