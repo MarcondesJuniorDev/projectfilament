@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->unsignedBigInteger('responsible_id');
-            $table->foreign('responsible_id')->references('id')->on('users');
+            $table->foreign('responsible_id')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('departments');
+            $table->foreign('parent_id')->references('id')->on('departments')->cascadeOnDelete();
             $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete();
             $table->integer('order')->default(0);
             $table->text('summary')->nullable();
             $table->text('description')->nullable();
