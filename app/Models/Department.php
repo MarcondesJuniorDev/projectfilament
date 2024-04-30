@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -34,6 +35,23 @@ class Department extends Model
         static::saving(function ($department) {
             $department->slug = Str::slug($department->name);
             $department->author_id = auth()->id() ?? User::factory()->create()->id;
+        });
+
+        static::deleting(function($department) {
+            if ($department->users()->count() > 0) {
+                Notification::make()
+                    ->title('Erro ao excluir departamento')
+                    ->body('Não é possível excluir um departamento que possui usuários vinculados.')
+                    ->color('danger')
+                    ->icon('heroicon-s-x-circle')
+                    ->iconColor('danger')
+                    ->status('error')
+                    ->duration(5000)
+                    ->inline()
+                    ->send();
+
+                return false;
+            }
         });
     }
 

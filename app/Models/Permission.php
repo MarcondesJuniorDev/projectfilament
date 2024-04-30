@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,23 @@ class Permission extends Model
 
         static::saving(function ($permission) {
             $permission->slug = Str::slug($permission->name);
+        });
+
+        static::deleting(function($permission) {
+            if ($permission->roles()->count() > 0) {
+                Notification::make()
+                    ->title('Erro ao excluir permissão')
+                    ->body('Não é possível excluir uma permissão que possui funções vinculadas.')
+                    ->color('danger')
+                    ->icon('heroicon-s-x-circle')
+                    ->iconColor('danger')
+                    ->status('error')
+                    ->duration(5000)
+                    ->inline()
+                    ->send();
+
+                return false;
+            }
         });
     }
 
