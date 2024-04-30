@@ -142,7 +142,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Funções')
                     ->badge(fn($record) => $record->roles->pluck('name'))
-                    ->color(Color::Emerald)
+                    ->color(function (string $state) : string {
+                        return match ($state) {
+                            'Super Admin' => 'danger',
+                            'Admin' => 'info',
+                            'Author' => 'success',
+                            'User' => 'warning',
+                        };
+                    })
                     ->width('150px')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('departments.name')
