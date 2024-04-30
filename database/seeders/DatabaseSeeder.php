@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
+use App\Models\CourseCategory;
 use App\Models\Department;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Subject;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,6 +25,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(50)->create();
         Department::factory()->count(10)->create();
+        CourseCategory::factory()->count(10)->create();
+        Course::factory()->count(10)->create();
+        Subject::factory()->count(10)->create();
 
         $this->attachUsersToDepartments();
     }
