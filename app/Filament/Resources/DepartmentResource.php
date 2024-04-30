@@ -30,45 +30,52 @@ class DepartmentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
-                    ->label('Capa')
-                    ->disk('public')
-                    ->directory('departments')
-                    ->image()
-                    ->imageEditor()
-                    ->preserveFilenames()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('name')
-                    ->label('Nome do departamento')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('responsible_id')
-                    ->label('Responsável')
-                    ->relationship('responsible', 'name')
-                    ->searchable()
-                    ->nullable(),
-                Forms\Components\Select::make('parent_id')
-                    ->label('Departamento Pai')
-                    ->relationship('parent', 'name')
-                    ->searchable()
-                    ->nullable(),
-                Forms\Components\TextInput::make('order')
-                    ->label('Ordem')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\Textarea::make('summary')
-                    ->label('Resumo')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('description')
-                    ->label('Descrição')
-                    ->columnSpanFull(),
-                Forms\Components\Toggle::make('status')
-                    ->label('Status')
-                    ->required(),
-                Forms\Components\ColorPicker::make('bg_color')
-                    ->label('Cor de fundo')
-                    ->required(),
+                Forms\Components\Section::make()
+                ->description('Informações do departamento')
+                ->aside()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Capa')
+                            ->disk('public')
+                            ->directory('departments')
+                            ->image()
+                            ->imageEditor()
+                            ->preserveFilenames()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nome do departamento')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('responsible_id')
+                            ->label('Responsável')
+                            ->default(auth()->id())
+                            ->relationship('responsible', 'name')
+                            ->searchable()
+                            ->nullable(),
+                        Forms\Components\Select::make('parent_id')
+                            ->label('Departamento Pai')
+                            ->relationship('parent', 'name')
+                            ->searchable()
+                            ->nullable(),
+                        Forms\Components\TextInput::make('order')
+                            ->label('Ordem')
+                            ->required()
+                            ->numeric()
+                            ->default(0),
+                        Forms\Components\Textarea::make('summary')
+                            ->label('Resumo')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descrição')
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('status')
+                            ->label('Status')
+                            ->required(),
+                        Forms\Components\ColorPicker::make('bg_color')
+                            ->label('Cor de fundo')
+                            ->required(),
+                    ])
+                    ->columns(2),
             ]);
     }
 
