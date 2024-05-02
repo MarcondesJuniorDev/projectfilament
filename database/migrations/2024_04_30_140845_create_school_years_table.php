@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('school_years', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('author_id');
-            $table->integer('year');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('year');
             $table->string('is_current')->default('no');
             $table->timestamps();
-
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
