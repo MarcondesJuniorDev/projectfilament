@@ -20,7 +20,7 @@ class ListCourses extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => ListRecords\Tab::make(),
+            'todos' => ListRecords\Tab::make(),
             'publicado' => ListRecords\Tab::make()->modifyQueryUsing(function ($query) {
                 $query->where('status', 'publicado');
             }),
