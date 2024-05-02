@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class SchoolYearFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'author_id' => User::query()->inRandomOrder()->first()->id,
+            'year' => $this->faker->year,
+            'is_current' => $this->faker->randomElement(['yes', 'no']),
         ];
     }
 }
