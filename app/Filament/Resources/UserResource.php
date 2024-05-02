@@ -218,9 +218,17 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ToggleColumn::make('status')
                     ->label('Status')
+                    ->onIcon('heroicon-s-check')
+                    ->offIcon('heroicon-s-x-mark')
+                    ->onColor('success')
+                    ->offColor('danger')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ToggleColumn::make('featured_homepage')
-                    ->label('Destaque na página inicial')
+                    ->label('Página inicial')
+                    ->onIcon('heroicon-s-check')
+                    ->offIcon('heroicon-s-x-mark')
+                    ->onColor('success')
+                    ->offColor('danger')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('about')
                     ->label('Sobre')
