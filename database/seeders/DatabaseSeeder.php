@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Department;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\SchoolGrade;
 use App\Models\Subject;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         CourseCategory::factory()->count(10)->create();
         Course::factory()->count(10)->create();
         Subject::factory()->count(10)->create();
+        SchoolGrade::factory()->count(10)->create();
 
         $this->attachUsersToDepartments();
     }
