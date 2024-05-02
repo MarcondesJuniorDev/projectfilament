@@ -21,8 +21,8 @@ class CourseFactory extends Factory
     {
         $title = $this->faker->word;
         return [
-            'author_id' => User::all()->random()->id,
-            'category_id' => CourseCategory::all()->random()->id,
+            'author_id' => User::query()->inRandomOrder()->first()->id,
+            'category_id' => CourseCategory::query()->inRandomOrder()->first()->id,
             'title' => $title,
             'slug' => Str::slug($title),
             'summary' => $this->faker->sentence,

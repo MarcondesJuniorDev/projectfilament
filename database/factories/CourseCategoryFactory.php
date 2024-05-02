@@ -20,7 +20,7 @@ class CourseCategoryFactory extends Factory
     {
         $name = $this->faker->word;
         return [
-            'author_id' => User::all()->random()->id,
+            'author_id' => User::query()->inRandomOrder()->first()->id,
             'name' => $name,
             'slug' => Str::slug($name),
             'order' => $this->faker->numberBetween(0, 100),

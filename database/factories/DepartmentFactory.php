@@ -23,8 +23,8 @@ class DepartmentFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'responsible_id' => User::factory(),
-            'author_id' => User::factory(),
+            'responsible_id' => User::query()->inRandomOrder()->first()->id,
+            'author_id' => User::query()->inRandomOrder()->first()->id,
             'parent_id' => $this->faker->randomElement([null, Department::factory()]),
             'order' => $this->faker->randomNumber(),
             'summary' => $this->faker->sentence(),

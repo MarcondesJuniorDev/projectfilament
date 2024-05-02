@@ -20,9 +20,9 @@ class SchoolGradeFactory extends Factory
     public function definition(): array
     {
         return [
-            'author_id' => User::all()->random()->id,
-            'course_id' => Course::all()->random()->id,
-            'subject_id' => Subject::all()->random()->id,
+            'author_id' => User::query()->inRandomOrder()->first()->id,
+            'course_id' => Course::query()->inRandomOrder()->first()->id,
+            'subject_id' => Subject::query()->inRandomOrder()->first()->id,
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'status' => $this->faker->randomElement(['publicado', 'rascunho', 'pendente']),
