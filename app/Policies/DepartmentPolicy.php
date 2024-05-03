@@ -10,51 +10,51 @@ class DepartmentPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasPermission('view-any-department');
+        return $user->hasPermission('view-any-department') || $user->hasRoles(['super-admin']);
     }
 
     public function view(User $user, Department $department): bool
     {
-        return $user->hasPermission('view-department');
+        return $user->hasPermission('view-department') || $user->hasRoles(['super-admin']);
     }
 
     public function create(User $user): bool
     {
-        return $user->hasPermission('create-department');
+        return $user->hasPermission('create-department') || $user->hasRoles(['super-admin']);
     }
 
     public function update(User $user, Department $department): bool
     {
-        return $user->hasPermission('update-department');
+        return $user->hasPermission('update-department') || $user->hasRoles(['super-admin']);
     }
 
     public function delete(User $user, Department $department): bool
     {
-        return $user->hasPermission('delete-department');
+        return $user->hasPermission('delete-department') || $user->hasRoles(['super-admin']);
     }
 
     public function restore(User $user, Department $department): bool
     {
-        return $user->hasPermission('restore-department');
+        return $user->hasPermission('restore-department') || $user->hasRoles(['super-admin']);
     }
 
     public function forceDelete(User $user, Department $department): bool
     {
-        return $user->hasPermission('force-delete-department');
+        return $user->hasPermission('force-delete-department') || $user->hasRoles(['super-admin']);
     }
 
     public function deleteAny(User $user): bool
     {
-        return $user->hasPermission('delete-any-department');
+        return $user->hasPermission('delete-any-department') || $user->hasRoles(['super-admin']);
     }
 
     public function restoreAny(User $user): bool
     {
-        return $user->hasPermission('restore-any-department');
+        return $user->hasPermission('restore-any-department') || $user->hasRoles(['super-admin']);
     }
 
     public function forceDeleteAny(User $user): bool
     {
-        return $user->hasPermission('force-delete-any-department');
+        return $user->hasPermission('force-delete-any-department') || $user->hasRoles(['super-admin']);
     }
 }
