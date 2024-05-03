@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('status')->default(true);
             $table->string('bg_color')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

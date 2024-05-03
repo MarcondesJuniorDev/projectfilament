@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['publicado', 'rascunho', 'pendente'])->default('rascunho');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

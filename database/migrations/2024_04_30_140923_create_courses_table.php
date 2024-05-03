@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('status', ['publicado', 'rascunho', 'pendente'])->default('rascunho');
             $table->boolean('featured')->default(false);
             $table->boolean('featured_menu')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

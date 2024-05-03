@@ -31,6 +31,7 @@ return new class extends Migration
             $table->enum('status', ['publicado', 'rascunho', 'pendente', 'cancelado'])->default('rascunho');
             $table->string('tags')->nullable();
             $table->date('lesson_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

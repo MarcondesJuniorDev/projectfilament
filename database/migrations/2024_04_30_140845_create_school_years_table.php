@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('year');
             $table->string('is_current')->default('no');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

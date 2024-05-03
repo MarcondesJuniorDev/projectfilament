@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_file')->default(false);
             $table->string('content_type');
             $table->string('content_value');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

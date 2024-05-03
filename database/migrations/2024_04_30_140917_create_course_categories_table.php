@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->integer('order')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 
