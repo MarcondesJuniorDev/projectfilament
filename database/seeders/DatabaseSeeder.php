@@ -7,8 +7,6 @@ use App\Models\CourseCategory;
 use App\Models\Department;
 use App\Models\Lesson;
 use App\Models\LessonContent;
-use App\Models\Permission;
-use App\Models\Role;
 use App\Models\SchoolGrade;
 use App\Models\SchoolYear;
 use App\Models\Subject;
@@ -20,18 +18,17 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->createRoles();
-        $this->createPermissions();
-        $this->createUsers();
-
-        $this->attachPermissionsToRoles();
-        $this->attachRolesToUsers();
+        $this->call([
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
+            PermissionRoleSeeder::class,
+            RoleUserSeeder::class,
+            DepartmentUserSeeder::class,
+        ]);
 
         User::factory()->count(10)->create();
         Department::factory()->count(10)->create();
-
-        $this->attachUsersToDepartments();
-
         CourseCategory::factory()->count(10)->create();
         Course::factory()->count(10)->create();
         Subject::factory()->count(10)->create();
@@ -46,84 +43,6 @@ class DatabaseSeeder extends Seeder
         }
 
 
-    }
-
-    private function createRoles(): void
-    {
-        Role::create(['name' => 'Super Admin', 'slug' => 'super-admin']);
-        Role::create(['name' => 'Admin', 'slug' => 'admin']);
-        Role::create(['name' => 'Author', 'slug' => 'author']);
-        Role::create(['name' => 'User', 'slug' => 'user']);
-    }
-
-    private function createPermissions(): void
-    {
-        Permission::create(['name' => 'Create User', 'slug' => 'create-user']);
-        Permission::create(['name' => 'View User', 'slug' => 'view-user']);
-        Permission::create(['name' => 'Edit User', 'slug' => 'edit-user']);
-        Permission::create(['name' => 'Delete User', 'slug' => 'delete-user']);
-
-        Permission::create(['name' => 'Create Role', 'slug' => 'create-role']);
-        Permission::create(['name' => 'View Role', 'slug' => 'view-role']);
-        Permission::create(['name' => 'Edit Role', 'slug' => 'edit-role']);
-        Permission::create(['name' => 'Delete Role', 'slug' => 'delete-role']);
-
-        Permission::create(['name' => 'Create Permission', 'slug' => 'create-permission']);
-        Permission::create(['name' => 'View Permission', 'slug' => 'view-permission']);
-        Permission::create(['name' => 'Edit Permission', 'slug' => 'edit-permission']);
-        Permission::create(['name' => 'Delete Permission', 'slug' => 'delete-permission']);
-
-    }
-
-    private function createUsers(): void
-    {
-        $users = [
-            ['name' => 'Super', 'email' => 'super@super.com', 'password' => bcrypt('M4rc0nd35')],
-            ['name' => 'Admin', 'email' => 'admin@admin.com', 'password' => bcrypt('M4rc0nd35')],
-            ['name' => 'Author', 'email' => 'author@author.com', 'password' => bcrypt('M4rc0nd35')],
-            ['name' => 'User', 'email' => 'user@user.com', 'password' => bcrypt('M4rc0nd35')],
-        ];
-        foreach ($users as $userData) {
-            $user = User::create($userData);
-        }
-    }
-
-    private function attachPermissionsToRoles(): void
-    {
-        $roles = ['super-admin', 'admin', 'author', 'user'];
-        $permissions = ['create-user', 'view-user', 'edit-user', 'delete-user', 'create-role', 'view-role', 'edit-role', 'delete-role', 'create-permission', 'view-permission', 'edit-permission', 'delete-permission'];
-
-        foreach ($roles as $roleName) {
-            $role = Role::where('slug', $roleName)->first();
-
-            foreach ($permissions as $permissionName) {
-                $permission = Permission::where('slug', $permissionName)->first();
-                $role->permissions()->attach($permission);
-            }
-        }
-    }
-
-    private function attachRolesToUsers(): void
-    {
-        $users = ['super@super.com', 'admin@admin.com', 'author@author.com', 'user@user.com'];
-        $roles = ['super-admin', 'admin', 'author', 'user'];
-
-        foreach ($users as $index => $userEmail) {
-            $user = User::where('email', $userEmail)->first();
-            $role = Role::where('slug', $roles[$index])->first();
-            $user->roles()->attach($role);
-        }
-    }
-
-    private function attachUsersToDepartments(): void
-    {
-        $users = User::all();
-
-        Department::all()->each(function ($department) use ($users) {
-            $department->users()->attach(
-                $users->random(rand(5, 10))->pluck('id')->toArray()
-            );
-        });
     }
 
     private function createSchoolYears(): void
