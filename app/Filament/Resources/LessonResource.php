@@ -35,8 +35,12 @@ class LessonResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('image')
                     ->label('Capa do Curso')
-                    ->columnSpanFull()
-                    ->image(),
+                    ->disk('public')
+                    ->directory('lessons')
+                    ->image()
+                    ->imageEditor()
+                    ->preserveFilenames()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()

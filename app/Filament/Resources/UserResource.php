@@ -216,19 +216,15 @@ class UserResource extends Resource
                     ->wrap('break-word')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\ToggleColumn::make('status')
+                Tables\Columns\IconColumn::make('status')
                     ->label('Status')
-                    ->onIcon('heroicon-s-check')
-                    ->offIcon('heroicon-s-x-mark')
-                    ->onColor('success')
-                    ->offColor('danger')
+                    ->icon(fn($record) => $record->status ? 'heroicon-s-check-badge' : 'heroicon-s-x-circle')
+                    ->color(fn($record) => $record->status ? 'success' : 'danger')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\ToggleColumn::make('featured_homepage')
+                Tables\Columns\IconColumn::make('featured_homepage')
                     ->label('Página inicial')
-                    ->onIcon('heroicon-s-check')
-                    ->offIcon('heroicon-s-x-mark')
-                    ->onColor('success')
-                    ->offColor('danger')
+                    ->icon(fn($record) => $record->featured_homepage ? 'heroicon-s-check-badge' : 'heroicon-s-x-circle')
+                    ->color(fn($record) => $record->featured_homepage ? 'success' : 'danger')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('about')
                     ->label('Sobre')
@@ -238,12 +234,12 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Criado em')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Atualizado em')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

@@ -85,8 +85,7 @@ class DepartmentResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Capa')
-                    ->width('40px')
-                    ->disk('public')
+                    ->width('80px')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Departamento')
