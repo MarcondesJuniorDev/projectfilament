@@ -7,6 +7,9 @@ use App\Models\CourseCategory;
 use App\Models\Department;
 use App\Models\Lesson;
 use App\Models\LessonContent;
+use App\Models\News;
+use App\Models\NewsCategory;
+use App\Models\NewsImage;
 use App\Models\SchoolGrade;
 use App\Models\SchoolYear;
 use App\Models\Subject;
@@ -42,7 +45,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-
+        NewsCategory::factory()->count(10)->create();
+        News::factory()->count(10)->create();
+        NewsImage::factory()->count(30)->create();
     }
 
     private function createSchoolYears(): void
