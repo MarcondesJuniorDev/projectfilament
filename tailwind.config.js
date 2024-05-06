@@ -5,9 +5,10 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    darkMode: 'class',
+    theme: {
+        extend: {},
+    },
+    plugins: [],
 }
 
