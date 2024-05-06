@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Award;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Department;
@@ -55,6 +56,8 @@ class DatabaseSeeder extends Seeder
         EventCategory::factory()->count(10)->create();
         Event::factory()->count(10)->create();
         EventImage::factory()->count(30)->create();
+
+        Award::factory()->count(10)->create();
     }
 
     private function createSchoolYears(): void
