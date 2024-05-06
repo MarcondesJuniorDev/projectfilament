@@ -123,7 +123,8 @@ class NewsResource extends Resource
                     ->badge()
                     ->color('info')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('featured')
                     ->label('Destaque')
                     ->boolean(),
