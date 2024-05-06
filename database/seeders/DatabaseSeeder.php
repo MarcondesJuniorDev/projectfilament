@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Award;
+use App\Models\Banner;
+use App\Models\BannerCategory;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Department;
@@ -49,15 +51,18 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        NewsCategory::factory()->count(10)->create();
-        News::factory()->count(10)->create();
-        NewsImage::factory()->count(30)->create();
+        NewsCategory::factory()->count(8)->create();
+        News::factory()->count(8)->create();
+        NewsImage::factory()->count(14)->create();
 
-        EventCategory::factory()->count(10)->create();
-        Event::factory()->count(10)->create();
-        EventImage::factory()->count(30)->create();
+        EventCategory::factory()->count(8)->create();
+        Event::factory()->count(8)->create();
+        EventImage::factory()->count(26)->create();
 
-        Award::factory()->count(10)->create();
+        Award::factory()->count(8)->create();
+
+        BannerCategory::factory()->count(8)->create();
+        Banner::factory()->count(8)->create();
     }
 
     private function createSchoolYears(): void
