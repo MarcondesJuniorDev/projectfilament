@@ -16,4 +16,20 @@ class ListEvents extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public function getTabs(): array
+    {
+        return [
+            'todos' => ListRecords\Tab::make(),
+            'publicado' => ListRecords\Tab::make()->modifyQueryUsing(function ($query) {
+                $query->where('status', 'publicado');
+            }),
+            'rascunho' => ListRecords\Tab::make()->modifyQueryUsing(function ($query) {
+                $query->where('status', 'rascunho');
+            }),
+            'pendente' => ListRecords\Tab::make()->modifyQueryUsing(function ($query) {
+                $query->where('status', 'pendente');
+            }),
+        ];
+    }
 }
