@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Department;
+use App\Models\Event;
+use App\Models\EventCategory;
+use App\Models\EventImage;
 use App\Models\Lesson;
 use App\Models\LessonContent;
 use App\Models\News;
@@ -48,6 +51,10 @@ class DatabaseSeeder extends Seeder
         NewsCategory::factory()->count(10)->create();
         News::factory()->count(10)->create();
         NewsImage::factory()->count(30)->create();
+
+        EventCategory::factory()->count(10)->create();
+        Event::factory()->count(10)->create();
+        EventImage::factory()->count(30)->create();
     }
 
     private function createSchoolYears(): void
