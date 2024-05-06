@@ -88,6 +88,8 @@ class NewsResource extends Resource
                     ->label('Imagens')
                     ->disk('public')
                     ->circular()
+                    ->width(60)
+                    ->height(60)
                     ->stacked()
                     ->limit(3)
                     ->limitedRemainingText(),
@@ -145,7 +147,7 @@ class NewsResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Atualizado em')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
